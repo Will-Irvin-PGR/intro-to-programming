@@ -11,7 +11,8 @@ import { DatePipe } from '@angular/common';
   selector: 'app-todo-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DatePipe],
-  template: ` @if (itemsResource.error()) {
+  template: `
+    @if (itemsResource.error()) {
       <p>Could Not Load Your Data For Reasons. Sorry.</p>
     }
     @for (item of itemsResource.value(); track item.id) {
@@ -29,7 +30,10 @@ import { DatePipe } from '@angular/common';
           }
         </div>
       </div>
-    }`,
+    } @empty {
+      <p>Good news, nothing on your Todo List!</p>
+    }
+  `,
   styles: ``,
 })
 export class TodoListComponent {
