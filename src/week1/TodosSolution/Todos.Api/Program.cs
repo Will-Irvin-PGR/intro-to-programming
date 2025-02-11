@@ -32,3 +32,6 @@ app.UseAuthorization();
 app.MapTodos();
 
 app.Run();
+
+// Allows the class to be public when the compiler didn't necessarily want it to be
+public partial class Program { }
