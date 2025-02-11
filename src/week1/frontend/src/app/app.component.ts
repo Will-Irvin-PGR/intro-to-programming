@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { TodosHandler } from './todos-handler';
 
 @Component({
   selector: 'app-root',
@@ -18,3 +19,4 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   imports: [RouterLink, RouterOutlet],
 })
 export class AppComponent {}
+export const handlers = { ...TodosHandler };
