@@ -29,11 +29,12 @@ public class Calculator
             string[] sepNewline = n.Split("\n");
             try
             {
-                if (int.Parse(n) < 0)
+                int next = int.Parse(n);
+                if (next < 0)
                 {
                     throw new Exception("No negative numbers allowed");
                 }
-                result += int.Parse(n);
+                result += next;
             }
             catch (FormatException)
             {
