@@ -64,4 +64,16 @@ public class CalculatorTests
         var result = calculator.Add(numbers);
         Assert.Equal(expected, result);
     }
+
+    [Theory]
+    [InlineData("//#\\1#2\n3", 6)]
+    [InlineData("//b\\1b2b11", 14)]
+    [InlineData("//a\\6a7\n3,2", 18)]
+    public void CustomDelimiters(string numbers, int expected)
+    {
+        var calculator = new Calculator();
+
+        var result = calculator.Add(numbers);
+        Assert.Equal(expected, result);
+    }
 }
