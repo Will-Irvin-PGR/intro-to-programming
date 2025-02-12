@@ -13,25 +13,19 @@ public class Calculator
 
         foreach (string n in sepNumbers)
         {
-            result += int.Parse(n);
+            string[] sepNewline = n.Split("\n");
+            foreach (string n2 in sepNewline)
+            {
+                try
+                {
+                    result += int.Parse(n2);
+                }
+                catch (FormatException)
+                {
+                    return 0;
+                }
+            }
         }
         return result; 
-        try
-        {
-            return int.Parse(numbers);
-        }
-        catch (FormatException)
-        {
-            string first = numbers.Substring(0, numbers.IndexOf(','));
-            string second = numbers.Substring(numbers.IndexOf(",") + 1);
-            try
-            {
-                return int.Parse(first) + int.Parse(second);
-            }
-            catch (FormatException)
-            {
-                return 0;
-            }
-        }
     }
 }
