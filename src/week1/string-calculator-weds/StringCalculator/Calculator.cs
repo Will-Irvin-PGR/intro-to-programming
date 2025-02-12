@@ -7,7 +7,16 @@ public class Calculator
         {
             return 0;
         }
-        
-        return int.Parse(numbers);
+
+        try
+        {
+            return int.Parse(numbers);
+        }
+        catch (FormatException)
+        {
+            string first = numbers.Substring(0, numbers.IndexOf(','));
+            string second = numbers.Substring(numbers.IndexOf(",") + 1);
+            return int.Parse(first) + int.Parse(second);
+        }
     }
 }
