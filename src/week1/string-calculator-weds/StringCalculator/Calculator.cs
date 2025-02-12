@@ -29,6 +29,10 @@ public class Calculator
             string[] sepNewline = n.Split("\n");
             try
             {
+                if (int.Parse(n) < 0)
+                {
+                    throw new Exception("No negative numbers allowed");
+                }
                 result += int.Parse(n);
             }
             catch (FormatException)

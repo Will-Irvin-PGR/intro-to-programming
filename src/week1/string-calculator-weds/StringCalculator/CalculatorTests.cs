@@ -76,4 +76,16 @@ public class CalculatorTests
         var result = calculator.Add(numbers);
         Assert.Equal(expected, result);
     }
+
+    [Theory]
+    [InlineData("//#\\-1#2\n-3")]
+    [InlineData("//b\\1b-2b11")]
+    [InlineData("//a\\6a-7\n3,2")]
+    [InlineData("-1")]
+    public void NegativeException(string numbers)
+    {
+        var calculator = new Calculator();
+
+        Assert.Throws<Exception>(() => calculator.Add(numbers));
+    }
 }
