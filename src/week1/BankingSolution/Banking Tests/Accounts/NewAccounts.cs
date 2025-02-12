@@ -1,7 +1,7 @@
 ﻿using Banking.Domain;
 
 namespace Banking_Tests.Accounts;
-public class NewAccountsHaveCorrectBalance
+public class NewAccounts
 {
     [Fact]
     public void BalanceIsCorrect()
