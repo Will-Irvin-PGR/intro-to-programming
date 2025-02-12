@@ -1,4 +1,6 @@
 ﻿
+using System.Text.RegularExpressions;
+
 public class Calculator
 {
     public int Add(string numbers)
@@ -8,23 +10,25 @@ public class Calculator
             return 0;
         }
 
-        string[] sepNumbers = numbers.Split(',');
+        string pattern = "[,\n]";
+
+        string[] sepNumbers = Regex.Split(numbers, pattern);
         int result = 0;
 
         foreach (string n in sepNumbers)
         {
             string[] sepNewline = n.Split("\n");
-            foreach (string n2 in sepNewline)
-            {
+            //foreach (string n2 in sepNewline)
+            //{
                 try
                 {
-                    result += int.Parse(n2);
+                    result += int.Parse(n);
                 }
                 catch (FormatException)
                 {
                     return 0;
                 }
-            }
+            //}
         }
         return result; 
     }
