@@ -8,6 +8,14 @@ public class Calculator
             return 0;
         }
 
+        string[] sepNumbers = numbers.Split(',');
+        int result = 0;
+
+        foreach (string n in sepNumbers)
+        {
+            result += int.Parse(n);
+        }
+        return result; 
         try
         {
             return int.Parse(numbers);
@@ -16,7 +24,14 @@ public class Calculator
         {
             string first = numbers.Substring(0, numbers.IndexOf(','));
             string second = numbers.Substring(numbers.IndexOf(",") + 1);
-            return int.Parse(first) + int.Parse(second);
+            try
+            {
+                return int.Parse(first) + int.Parse(second);
+            }
+            catch (FormatException)
+            {
+                return 0;
+            }
         }
     }
 }
