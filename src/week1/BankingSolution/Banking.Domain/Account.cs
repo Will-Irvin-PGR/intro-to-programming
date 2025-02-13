@@ -1,39 +1,46 @@
-﻿namespace Banking.Domain
+﻿namespace Banking.Domain;
+
+public enum AccountTypes { Standard, Gold, Platinum }
+public class Account
 {
-    public class Account
+    private decimal _currentBalance = 5000;
+    public AccountTypes AccountType = AccountTypes.Standard;
+
+    public void Deposit(decimal amountToDeposit)
     {
-        private decimal _currentBalance = 5000;
-        public void Deposit(decimal amountToDeposit)
+        CheckTransactionAmount(amountToDeposit);
+        decimal bonus = 0;
+        if (AccountType == AccountTypes.Gold)
         {
-            CheckTransactionAmount(amountToDeposit);
-            _currentBalance += amountToDeposit;
+            bonus = amountToDeposit * .2M;
         }
+        _currentBalance += amountToDeposit + bonus;
+    }
 
-        public decimal GetBalance()
+    public decimal GetBalance()
+    {
+        return _currentBalance;
+    }
+
+    public void Withdraw(decimal amountToWithdraw)
+    {
+        CheckTransactionAmount(amountToWithdraw);
+
+        if (_currentBalance >= amountToWithdraw)
         {
-            return _currentBalance;
+            _currentBalance -= amountToWithdraw;
         }
-
-        public void Withdraw(decimal amountToWithdraw)
+        else
         {
-            CheckTransactionAmount(amountToWithdraw);
-
-            if (_currentBalance >= amountToWithdraw)
-            {
-                _currentBalance -= amountToWithdraw;
-            }
-            else
-            {
-                throw new AccountOverdraftException();
-            }
+            throw new AccountOverdraftException();
         }
+    }
 
-        private static void CheckTransactionAmount(decimal amount)
+    private static void CheckTransactionAmount(decimal amount)
+    {
+        if (amount < 0)
         {
-            if (amount < 0)
-            {
-                throw new AccountNegativeTransactionException();
-            }
+            throw new AccountNegativeTransactionException();
         }
     }
 }

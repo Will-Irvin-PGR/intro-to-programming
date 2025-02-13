@@ -11,7 +11,7 @@ public class GetBonusOnDeposits
         var amountToDeposit = 100M;
         var expectedBonus = 20M;
         var expectedNewBalance = openingBalance + amountToDeposit + expectedBonus;
-
+        account.AccountType = AccountTypes.Gold;
         account.Deposit(amountToDeposit);
 
         Assert.Equal(expectedNewBalance, account.GetBalance());
