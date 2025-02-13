@@ -4,17 +4,11 @@ public enum AccountTypes { Standard, Gold, Platinum }
 public class Account
 {
     private decimal _currentBalance = 5000;
-    public AccountTypes AccountType = AccountTypes.Standard;
 
-    public void Deposit(decimal amountToDeposit)
+    public virtual void Deposit(decimal amountToDeposit)
     {
         CheckTransactionAmount(amountToDeposit);
-        decimal bonus = 0;
-        if (AccountType == AccountTypes.Gold)
-        {
-            bonus = amountToDeposit * .2M;
-        }
-        _currentBalance += amountToDeposit + bonus;
+        _currentBalance += amountToDeposit;
     }
 
     public decimal GetBalance()
