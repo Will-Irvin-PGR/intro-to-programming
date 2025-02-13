@@ -1,7 +1,4 @@
-﻿
-
-
-namespace Banking.Domain
+﻿namespace Banking.Domain
 {
     public class Account
     {
@@ -18,7 +15,9 @@ namespace Banking.Domain
 
         public void Withdraw(decimal amountToWithdraw)
         {
-            _amount -= amountToWithdraw;
+            if (_amount >= amountToWithdraw) {
+                _amount -= amountToWithdraw;
+            }
         }
     }
 }
