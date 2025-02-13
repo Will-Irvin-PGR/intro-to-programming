@@ -4,16 +4,19 @@ public enum AccountTypes { Standard, Gold, Platinum }
 public class Account
 {
     private decimal _currentBalance = 5000;
+    private ICalculateBonusesForDepositsOnAccounts _bonusCalculator;
+
+    public Account(ICalculateBonusesForDepositsOnAccounts bonusCalculator)
+    {
+        _currentBalance = 5000;
+        _bonusCalculator = bonusCalculator;
+    }
 
     public virtual void Deposit(decimal amountToDeposit)
     {
+
         CheckTransactionAmount(amountToDeposit);
-        var bonus = 0M;
-        if (_currentBalance >= 5000M)
-        {
-            bonus = amountToDeposit * .2M;
-        }
-        _currentBalance += amountToDeposit;
+        _currentBalance += amountToDeposit + _bonusCalculator.CalculateBonusForDeposit(_currentBalance, amountToDeposit);
     }
 
     public decimal GetBalance()
