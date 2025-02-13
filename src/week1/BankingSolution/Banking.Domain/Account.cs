@@ -17,6 +17,9 @@
         {
             if (_amount >= amountToWithdraw) {
                 _amount -= amountToWithdraw;
+            } else
+            {
+                throw new AccountOverdraftException();
             }
         }
     }
