@@ -18,4 +18,12 @@ public class MakingDeposits
         // Then
         Assert.Equal(openingBalance + amountToDeposit, account.GetBalance());
     }
+
+
+    [Fact]
+    public void CannotMakeDepositWithNegativeNums()
+    {
+        var account = new Account();
+        Assert.Throws<AccountNegativeTransactionException>(() => account.Deposit(-1));
+    }
 }

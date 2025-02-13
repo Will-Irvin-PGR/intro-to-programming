@@ -17,6 +17,13 @@ public class MakingWithdrawals
     }
 
     [Fact]
+    public void CannotMakeWithdrawalWithNegativeNum()
+    {
+        var account = new Account();
+        Assert.Throws<AccountNegativeTransactionException>(() => account.Withdraw(-3));
+    }
+
+    [Fact]
     public void CanWithdrawFullBalance()
     {
         var account = new Account();
@@ -33,8 +40,6 @@ public class MakingWithdrawals
         var openingBalance = account.GetBalance();
         var amountToWithdraw = openingBalance + .01M;
 
-        account.Withdraw(amountToWithdraw);
-
-        Assert.Equal(openingBalance, account.GetBalance());
+        Assert.Throws<AccountOverdraftException>(() => account.Withdraw(amountToWithdraw));
     }
 }

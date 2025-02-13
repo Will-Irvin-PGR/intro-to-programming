@@ -2,24 +2,37 @@
 {
     public class Account
     {
-        private decimal _amount = 5000;
+        private decimal _currentBalance = 5000;
         public void Deposit(decimal amountToDeposit)
         {
-            _amount += amountToDeposit;
+            CheckTransactionAmount(amountToDeposit);
+            _currentBalance += amountToDeposit;
         }
 
         public decimal GetBalance()
         {
-            return _amount;
+            return _currentBalance;
         }
 
         public void Withdraw(decimal amountToWithdraw)
         {
-            if (_amount >= amountToWithdraw) {
-                _amount -= amountToWithdraw;
-            } else
+            CheckTransactionAmount(amountToWithdraw);
+
+            if (_currentBalance >= amountToWithdraw)
+            {
+                _currentBalance -= amountToWithdraw;
+            }
+            else
             {
                 throw new AccountOverdraftException();
+            }
+        }
+
+        private static void CheckTransactionAmount(decimal amount)
+        {
+            if (amount < 0)
+            {
+                throw new AccountNegativeTransactionException();
             }
         }
     }
