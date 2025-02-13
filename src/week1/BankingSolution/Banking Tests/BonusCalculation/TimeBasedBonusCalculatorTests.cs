@@ -1,4 +1,5 @@
 ﻿using Banking.Domain;
+using NSubstitute;
 
 namespace Banking_Tests.BonusCalculation;
 public class TimeBasedBonusCalculatorTests
@@ -9,8 +10,11 @@ public class TimeBasedBonusCalculatorTests
     [InlineData(10000, 200, 40)]
     public void BonusesThatMeetThresholdInBusinessHoursGetBonus(decimal balance, decimal depositAmount, decimal expectedBonus)
     {
-        var bonusCalculator = new TimeBoundBasedCalculator();
+        var stubbedBusinessClock = Substitute.For<IProvideTheBusinessClockForBonusCalculation>();
+        
+        var bonusCalculator = new TimeBoundBasedCalculator(stubbedBusinessClock);
 
+        stubbedBusinessClock.CurrentlyDuringBusinessHours().Returns(true);
         decimal bonus = bonusCalculator.CalculateBonusForDeposit(balance, depositAmount);
 
         Assert.Equal(expectedBonus, bonus);
@@ -22,7 +26,11 @@ public class TimeBasedBonusCalculatorTests
     [InlineData(10000, 200, 0)]
     public void BonusesThatMeetThresholdOutsideBusinessHoursGetNoBonus(decimal balance, decimal depositAmount, decimal expectedBonus)
     {
-        var bonusCalculator = new TimeBoundBasedCalculator();
+        var stubbedBusinessClock = Substitute.For<IProvideTheBusinessClockForBonusCalculation>();
+
+        var bonusCalculator = new TimeBoundBasedCalculator(stubbedBusinessClock);
+
+        stubbedBusinessClock.CurrentlyDuringBusinessHours().Returns(false);
 
         decimal bonus = bonusCalculator.CalculateBonusForDeposit(balance, depositAmount);
 
@@ -35,7 +43,11 @@ public class TimeBasedBonusCalculatorTests
     [InlineData(0, 1000, 0)]
     public void BonusesBelowThresholdGetNoBonus(decimal balance, decimal depositAmount, decimal expectedBonus)
     {
-        var bonusCalculator = new TimeBoundBasedCalculator();
+        var stubbedBusinessClock = Substitute.For<IProvideTheBusinessClockForBonusCalculation>();
+
+        var bonusCalculator = new TimeBoundBasedCalculator(stubbedBusinessClock);
+
+        stubbedBusinessClock.CurrentlyDuringBusinessHours().Returns(true);
 
         decimal bonus = bonusCalculator.CalculateBonusForDeposit(balance, depositAmount);
 
