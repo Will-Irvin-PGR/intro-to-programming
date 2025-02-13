@@ -6,7 +6,7 @@ public class GetBonusOnDeposits
     [Fact]
     public void GetBonus()
     {
-        var account = new GoldAccount();
+        var account = new Account();
         var openingBalance = account.GetBalance();
         var amountToDeposit = 100M;
         var expectedBonus = 20M;

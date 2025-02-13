@@ -8,6 +8,11 @@ public class Account
     public virtual void Deposit(decimal amountToDeposit)
     {
         CheckTransactionAmount(amountToDeposit);
+        var bonus = 0M;
+        if (_currentBalance >= 5000M)
+        {
+            bonus = amountToDeposit * .2M;
+        }
         _currentBalance += amountToDeposit;
     }
 
