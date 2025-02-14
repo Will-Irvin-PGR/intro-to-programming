@@ -7,7 +7,27 @@ public class Calculator
         {
             return 0;
         }
-        
-        return int.Parse(numbers);
+
+        if (numbers.Contains(','))
+        {
+            var ind = numbers.IndexOf(',');
+            try
+            {
+                return int.Parse(numbers.Substring(0, ind)) + int.Parse(numbers.Substring(ind + 1));
+            }
+            catch (FormatException)
+            {
+                return 0;
+            }
+        }
+
+        try
+        {
+            return int.Parse(numbers);
+        }
+        catch (FormatException)
+        {
+            return 0;
+        }
     }
 }
