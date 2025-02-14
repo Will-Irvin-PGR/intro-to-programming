@@ -12,12 +12,16 @@ public class Calculator
 
         string pattern = "[,\n]";
 
-        if (numbers.Length > 4 &&
-            numbers[0] == '/' && numbers[1] == '/' && numbers[3] == '\\')
-        {
-            pattern = pattern.Substring(0, pattern.Length - 1) + numbers[2] + ']';
-            numbers = numbers.Substring(4);
-        }
+        string delimPattern = "//(.)\\|//\\[(.*)\\]\\";
+
+        //if (numbers.Length > 4 &&
+        //    numbers[0] == '/' && numbers[1] == '/' && numbers[3] == '\\')
+        //{
+        //    pattern = pattern.Substring(0, pattern.Length - 1) + numbers[2] + ']';
+        //    numbers = numbers.Substring(4);
+        //}
+
+        Regex.Matches(numbers, delimPattern);
 
         try
         {
