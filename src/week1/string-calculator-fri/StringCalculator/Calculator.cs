@@ -21,7 +21,12 @@ public class Calculator
 
         try
         {
-            return Regex.Split(numbers, pattern).Select(int.Parse).Sum();
+            var numList = Regex.Split(numbers, pattern).Select(int.Parse);
+            if (numList.Where((num) => num < 0).Count() > 0)
+            {
+                throw new NegativeNumberException();
+            }
+            return numList.Sum();
         }
         catch (FormatException)
         {
@@ -29,3 +34,5 @@ public class Calculator
         }
     }
 }
+
+public class NegativeNumberException : ArgumentException { }
