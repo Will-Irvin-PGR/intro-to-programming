@@ -81,4 +81,15 @@ public class CalculatorTests
     {
         Assert.Throws<NegativeNumberException>(() => calculator.Add(numbers));
     }
+
+    [Theory]
+    [InlineData("//#\\-1\n2#-3", "-1,-3")]
+    [InlineData("//a\\2a4,-10,-11", "-10,-11")]
+    [InlineData("//%\\-3%7%-100\n20", "-3,-100")]
+    [InlineData("//b\\-429,51\n1b-3b-4", "-429,-3,-4")]
+    public void NoNegativesWithList(string numbers, string list)
+    {
+        string message = Assert.Throws<NegativeNumberException>(() => calculator.Add(numbers)).Message;
+        Assert.Equal(list, message);
+    }
 }

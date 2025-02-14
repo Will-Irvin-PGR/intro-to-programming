@@ -22,9 +22,11 @@ public class Calculator
         try
         {
             var numList = Regex.Split(numbers, pattern).Select(int.Parse);
-            if (numList.Where((num) => num < 0).Count() > 0)
+            var negList = numList.Where((num) => num < 0);
+            if (negList.Count() > 0)
             {
-                throw new NegativeNumberException();
+                var negStrings = negList.Select((num) => num.ToString());   
+                throw new NegativeNumberException(string.Join(",", negStrings));
             }
             return numList.Sum();
         }
@@ -35,4 +37,9 @@ public class Calculator
     }
 }
 
-public class NegativeNumberException : ArgumentException { }
+public class NegativeNumberException : ArgumentException
+{
+    public NegativeNumberException(string? message) : base(message)
+    {
+    }
+}
