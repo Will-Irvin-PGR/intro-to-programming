@@ -59,4 +59,16 @@ public class CalculatorTests
 
         Assert.Equal(expected, result);
     }
+
+    [Theory]
+    [InlineData("//#\\1\n2#3", 6)]
+    [InlineData("//a\\2a4,10,11", 27)]
+    [InlineData("//%\\3%7%100\n20", 130)]
+    [InlineData("//b\\429,51\n1b3b4", 488)]
+    public void CustomDelimiter(string numbers, int expected)
+    {
+        var result = calculator.Add(numbers);
+
+        Assert.Equal(expected, result);
+    }
 }
