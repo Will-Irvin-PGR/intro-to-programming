@@ -92,4 +92,16 @@ public class CalculatorTests
         string message = Assert.Throws<NegativeNumberException>(() => calculator.Add(numbers)).Message;
         Assert.Equal(list, message);
     }
+
+    [Theory]
+    [InlineData("1000,2,3234", 1002)]
+    [InlineData("2,4120,10,1100", 12)]
+    [InlineData("3,7,1000,999", 2009)]
+    [InlineData("1001,51,1,3,4", 59)]
+    public void IgnoreOver1000(string numbers, int expected)
+    {
+        var result = calculator.Add(numbers);
+
+        Assert.Equal(expected, result);
+    }
 }

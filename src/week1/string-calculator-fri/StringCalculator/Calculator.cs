@@ -28,7 +28,7 @@ public class Calculator
                 var negStrings = negList.Select((num) => num.ToString());   
                 throw new NegativeNumberException(string.Join(",", negStrings));
             }
-            return numList.Sum();
+            return numList.Where((num) => num <= 1000).Sum();
         }
         catch (FormatException)
         {
