@@ -35,4 +35,16 @@ public class CalculatorTests
 
         Assert.Equal(expected, result);
     }
+
+    [Theory]
+    [InlineData("1,2, 3", 6)]
+    [InlineData("2,4,10,11", 27)]
+    [InlineData("3,7,100,20", 130)]
+    [InlineData("429,51,1,3,4", 488)]
+    public void ArbitraryIntegers(string numbers, int expected)
+    {
+        var result = calculator.Add(numbers);
+
+        Assert.Equal(expected, result);
+    }
 }
