@@ -47,4 +47,16 @@ public class CalculatorTests
 
         Assert.Equal(expected, result);
     }
+
+    [Theory]
+    [InlineData("1\n2\n3", 6)]
+    [InlineData("2\n4,10,11", 27)]
+    [InlineData("3,7,100\n20", 130)]
+    [InlineData("429,51\n1\n3,4", 488)]
+    public void NewLineDelimiter(string numbers, int expected)
+    {
+        var result = calculator.Add(numbers);
+
+        Assert.Equal(expected, result);
+    }
 }

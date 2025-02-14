@@ -1,4 +1,6 @@
 ﻿
+using System.Text.RegularExpressions;
+
 public class Calculator
 {
     public int Add(string numbers)
@@ -8,22 +10,11 @@ public class Calculator
             return 0;
         }
 
-        //if (numbers.Contains(','))
-        //{
-        //    var ind = numbers.IndexOf(',');
-        //    try
-        //    {
-        //        return int.Parse(numbers.Substring(0, ind)) + int.Parse(numbers.Substring(ind + 1));
-        //    }
-        //    catch (FormatException)
-        //    {
-        //        return 0;
-        //    }
-        //}
+        string pattern = "[,\n]";
 
         try
         {
-            return numbers.Split(",").Select(int.Parse).Sum();
+            return Regex.Split(numbers, pattern).Select(int.Parse).Sum();
         }
         catch (FormatException)
         {
