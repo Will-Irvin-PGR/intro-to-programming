@@ -3,10 +3,12 @@
 namespace StringCalculator;
 public class CalculatorTests
 {
+
+    private Calculator calculator = new Calculator(Substitute.For<ILogger>());
     [Fact]
     public void EmptyStringReturnsZero()
     {
-        var calculator = new Calculator();
+        //var calculator = new Calculator();
 
         var result = calculator.Add("");
 
@@ -20,7 +22,7 @@ public class CalculatorTests
     [InlineData("1000", 1000)]
     public void SingleDigit(string numbers, int expected)
     {
-        var calculator = new Calculator();
+        //var calculator = new Calculator();
 
         var result = calculator.Add(numbers);
 
@@ -33,7 +35,7 @@ public class CalculatorTests
     [InlineData("3, 4", 7)]
     public void TwoDigits(string numbers, int expected)
     {
-        var calculator = new Calculator();
+        //var calculator = new Calculator();
 
         var result = calculator.Add(numbers);
 
@@ -46,7 +48,7 @@ public class CalculatorTests
     [InlineData("1000, 54, 65, 2, 3", 1124)]
     public void ArbitraryDigits(string numbers, int expected)
     {
-        var calculator = new Calculator();
+        //var calculator = new Calculator();
 
         var result = calculator.Add(numbers);
         Assert.Equal(expected, result);
@@ -59,7 +61,7 @@ public class CalculatorTests
     [InlineData("2\n 3", 5)]
     public void ArbitraryDelimiters(string numbers, int expected)
     {
-        var calculator = new Calculator();
+        //var calculator = new Calculator();
 
         var result = calculator.Add(numbers);
         Assert.Equal(expected, result);
@@ -71,7 +73,7 @@ public class CalculatorTests
     [InlineData("//a\\6a7\n3,2", 18)]
     public void CustomDelimiters(string numbers, int expected)
     {
-        var calculator = new Calculator();
+        //var calculator = new Calculator();
 
         var result = calculator.Add(numbers);
         Assert.Equal(expected, result);
@@ -84,7 +86,7 @@ public class CalculatorTests
     [InlineData("-1")]
     public void NegativeException(string numbers)
     {
-        var calculator = new Calculator();
+        //var calculator = new Calculator();
 
         Assert.Throws<Exception>(() => calculator.Add(numbers));
     }

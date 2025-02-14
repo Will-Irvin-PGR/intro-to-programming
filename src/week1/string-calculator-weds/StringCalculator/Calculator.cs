@@ -1,7 +1,8 @@
 ﻿
 using System.Text.RegularExpressions;
+using StringCalculator;
 
-public class Calculator
+public class Calculator(ILogger _logger)
 {
     public int Add(string numbers)
     {
@@ -41,6 +42,7 @@ public class Calculator
                 return 0;
             }
         }
+        _logger.Write(result.ToString());
         return result;
     }
 }
