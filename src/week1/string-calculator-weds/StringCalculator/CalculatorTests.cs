@@ -4,7 +4,7 @@ namespace StringCalculator;
 public class CalculatorTests
 {
 
-    private Calculator calculator = new Calculator(Substitute.For<ILogger>());
+    private Calculator calculator = new Calculator(Substitute.For<ILogger>(), Substitute.For<IWebService>());
     [Fact]
     public void EmptyStringReturnsZero()
     {

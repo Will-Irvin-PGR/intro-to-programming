@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using StringCalculator;
 
-public class Calculator(ILogger _logger)
+public class Calculator(ILogger _logger, IWebService _webService)
 {
     public int Add(string numbers)
     {
@@ -42,7 +42,21 @@ public class Calculator(ILogger _logger)
                 return 0;
             }
         }
-        _logger.Write(result.ToString());
+
+        try
+        {
+            _logger.Write(result.ToString());
+        }
+        catch (Exception e)
+        {
+            // Should make API Request
+            _webService.NotifyOfLoggingFailure(e.Message);
+        }
         return result;
     }
+}
+
+public interface IWebService
+{
+    void NotifyOfLoggingFailure(string message);
 }
