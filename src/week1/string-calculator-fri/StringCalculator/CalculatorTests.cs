@@ -104,4 +104,16 @@ public class CalculatorTests
 
         Assert.Equal(expected, result);
     }
+
+    [Theory]
+    [InlineData("//[***]\\1\n2***3", 6)]
+    [InlineData("//[abcd]\\2abcd4,10abcd11", 27)]
+    [InlineData("//[%&]\\3%&7%&100\n20", 130)]
+    [InlineData("//[x$]\\429,51\n1x$3x$4", 488)]
+    public void ArbitLengthDelimiters(string numbers, int expected)
+    {
+        var result = calculator.Add(numbers);
+
+        Assert.Equal(expected, result);
+    }
 }
