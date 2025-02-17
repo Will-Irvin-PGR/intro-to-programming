@@ -21,9 +21,11 @@ import { BankStore } from './services/bank.store';
         <a routerLink="deposit" class="btn btn-xs btn-secondary"
           >Make a Deposit</a
         >
-        <a routerLink="withdrawal" class="btn btn-xs btn-secondary"
-          >Make a Withdrawal</a
-        >
+        @if (store.currentBalance() > 0) {
+          <a routerLink="withdrawal" class="btn btn-xs btn-secondary"
+            >Make a Withdrawal</a
+          >
+        }
       </p>
       <div>
         <router-outlet />
