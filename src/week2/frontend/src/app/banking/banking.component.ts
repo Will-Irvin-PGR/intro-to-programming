@@ -6,7 +6,6 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CurrencyPipe],
   template: `
-    <p>Banking Stuff Coming Soon</p>
     <div>
       <p>Your balance is {{ currentBalance() | currency }}</p>
     </div>
