@@ -12,6 +12,11 @@ export const routes: Routes = [
       import('./banking/banking.routes').then((r) => r.BANKING_ROUTES),
   },
   {
+    path: 'resources',
+    loadChildren: () =>
+      import('./resources/resources.routes').then((r) => r.RESOURCES_ROUTES),
+  },
+  {
     path: '**', // Redirect to everyone, works like a switch statement default
     redirectTo: 'dashboard',
   },
