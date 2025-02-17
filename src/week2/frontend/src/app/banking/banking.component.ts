@@ -1,21 +1,39 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 
 @Component({
   selector: 'app-banking',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [CurrencyPipe],
   template: `
     <p>Banking Stuff Coming Soon</p>
     <div>
-      <p>Your balance is $5,000.00</p>
+      <p>Your balance is {{ currentBalance() | currency }}</p>
     </div>
 
     <div>
-      <input type="number" class="input input-bordered" id="amount" />
-      <button class="btn btn-warning">Withdraw</button>
-      <button class="btn btn-primary">Deposit</button>
+      <input #txamount type="number" class="input input-bordered" id="amount" />
+      <button
+        (click)="withdraw(txamount.valueAsNumber)"
+        class="btn btn-warning"
+      >
+        Withdraw
+      </button>
+      <button (click)="deposit(txamount.valueAsNumber)" class="btn btn-primary">
+        Deposit
+      </button>
     </div>
   `,
   styles: ``,
 })
-export class BankingComponent {}
+export class BankingComponent {
+  currentBalance = signal(5000);
+
+  deposit(amount: number) {
+    this.currentBalance.update((balance) => balance + amount);
+  }
+
+  withdraw(amount: number) {
+    this.currentBalance.update((balance) => balance - amount);
+  }
+}
