@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { BankService } from '../services/bank.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { BankStore } from '../services/bank.store';
 
 @Component({
   selector: 'app-banking-withdrawal',
@@ -25,7 +26,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styles: ``,
 })
 export class WithdrawalComponent {
-  service = inject(BankService);
+  store = inject(BankStore);
 
   form = new FormGroup({
     amount: new FormControl<number>(0, { nonNullable: true }),
@@ -33,6 +34,6 @@ export class WithdrawalComponent {
 
   doWithdrawal() {
     // do the deposit here.
-    this.service.withdrawal(this.form.controls.amount.value);
+    this.store.withdraw(this.form.controls.amount.value);
   }
 }

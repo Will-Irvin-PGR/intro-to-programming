@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { BankService } from './services/bank.service';
+import { BankStore } from './services/bank.store';
 
 @Component({
   selector: 'app-banking',
@@ -16,7 +17,7 @@ import { BankService } from './services/bank.service';
   template: `
     <div>
       <p>
-        Your Checking Balance is {{ currentBalance() | currency }}
+        Your Checking Balance is {{ store.currentBalance() | currency }}
         <a routerLink="deposit" class="btn btn-xs btn-secondary"
           >Make a Deposit</a
         >
@@ -32,6 +33,6 @@ import { BankService } from './services/bank.service';
   styles: ``,
 })
 export class BankingComponent {
-  service = inject(BankService);
-  currentBalance = this.service.getCurrentBalance();
+  store = inject(BankStore);
+  // currentBalance = this.service.currentBalance();
 }
