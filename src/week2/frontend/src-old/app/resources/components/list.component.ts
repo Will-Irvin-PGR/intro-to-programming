@@ -6,13 +6,11 @@ import { LinkDocsDisplayItemComponent } from './link-docs-display-item.component
   selector: 'app-resources-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [LinkDocsDisplayItemComponent],
-  template: `
-    <div class="flex gap-4">
-      @for (link of links(); track link.id) {
-        <app-link-docs-display-item [link]="link" />
-      }
-    </div>
-  `,
+  template: ` <div class="flex gap-4">
+    @for (link of links(); track link.id) {
+      <app-link-docs-display-item [link]="link" />
+    }
+  </div>`,
   styles: ``,
 })
 export class ListComponent {

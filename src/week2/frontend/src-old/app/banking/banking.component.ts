@@ -1,12 +1,18 @@
 import { CurrencyPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  signal,
+  inject,
+} from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { BankService } from './services/bank.service';
 import { BankStore } from './services/bank.store';
 
 @Component({
   selector: 'app-banking',
   changeDetection: ChangeDetectionStrategy.OnPush,
-
+  providers: [BankService],
   imports: [CurrencyPipe, RouterOutlet, RouterLink],
   template: `
     <div>
@@ -30,4 +36,5 @@ import { BankStore } from './services/bank.store';
 })
 export class BankingComponent {
   store = inject(BankStore);
+  // currentBalance = this.service.currentBalance();
 }

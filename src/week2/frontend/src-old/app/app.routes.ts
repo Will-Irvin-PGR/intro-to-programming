@@ -9,12 +9,7 @@ export const routes: Routes = [
   {
     path: 'banking',
     loadChildren: () =>
-      import('./banking/banking.routes').then((r) => r.BANKING_ROUTES), // lazy loading, more later.
-  },
-  {
-    path: 'counter',
-    loadChildren: () =>
-      import('./counter/counter.routes').then((r) => r.COUNTER_ROUTES),
+      import('./banking/banking.routes').then((r) => r.BANKING_ROUTES),
   },
   {
     path: 'resources',
@@ -22,7 +17,7 @@ export const routes: Routes = [
       import('./resources/resources.routes').then((r) => r.RESOURCES_ROUTES),
   },
   {
-    path: '**', // catch all
+    path: '**', // Redirect to everyone, works like a switch statement default
     redirectTo: 'dashboard',
   },
 ];

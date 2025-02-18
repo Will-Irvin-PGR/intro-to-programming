@@ -8,17 +8,17 @@ import { ResourceListItem } from '../types';
   template: `
     <div class="card bg-neutral text-neutral-content w-96">
       <div class="card-body items-center text-center">
-        <h2 class="card-title">Documentation: {{ link().title }}</h2>
+        <h2 class="card-title">
+          {{ link().title }}
+        </h2>
         <p>{{ link().description }}</p>
         <div class="card-actions justify-end">
-          <a class="btn btn-link" [href]="link().link" target="_blank">{{
+          <a [href]="link().link" target="_blank" class="btn btn-link">{{
             link().linkText
           }}</a>
           <div>
             @for (tag of link().tags; track $index) {
-              <div class="badge badge-secondary badge-outline">
-                {{ tag }}
-              </div>
+              <div class="badge badge-secondary badge-outline">{{ tag }}</div>
             }
           </div>
         </div>

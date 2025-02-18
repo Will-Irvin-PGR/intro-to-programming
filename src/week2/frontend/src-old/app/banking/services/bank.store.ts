@@ -1,4 +1,4 @@
-// 1. What kind of data are you going to keep in memory in this store.
+// 1. What kind of data in memory?
 
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 
