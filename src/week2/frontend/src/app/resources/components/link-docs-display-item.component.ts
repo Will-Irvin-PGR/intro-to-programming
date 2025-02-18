@@ -22,12 +22,12 @@ import { DatePipe } from '@angular/common';
               </div>
             }
           </div>
-        </div>
-        <div>
-          <p>
-            This was created by {{ link().createdBy }} on
-            {{ link().createdOn | date }}
-          </p>
+          <div>
+            <p>
+              This was created by {{ link().createdBy }} on
+              {{ link().createdOn | date }}
+            </p>
+          </div>
         </div>
       </div>
     </div>

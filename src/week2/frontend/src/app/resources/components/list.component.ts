@@ -10,7 +10,7 @@ import { LinkDocsDisplayItemComponent } from './link-docs-display-item.component
       @for (link of linksResource.value(); track link.id) {
         <app-link-docs-display-item [link]="link" />
       } @empty {
-        <p>You don't have any resources! Add some?</p>
+        <p>You don't have any resources! Add Some?</p>
       }
     </div>
   `,
