@@ -8,3 +8,18 @@ export type ResourceListItem = {
   createdOn: string;
   tags: string[];
 };
+
+// Option 1 for create model
+// export type ResourceListItemCreateModel = {
+//   title: string;
+//   description: string;
+//   link: string;
+//   linkText: string;
+//   tags: string;
+// };
+
+// Option 2 w/ TypeScript trick
+export type ResourceListItemCreateModel = Omit<
+  ResourceListItem,
+  'id' | 'createdOn' | 'createdBy' | 'tags'
+> & { tags: string };
