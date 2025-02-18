@@ -24,4 +24,8 @@ describe('Making Tags', () => {
 
     expect(results).toEqual(['dog', 'cat', 'bear']);
   });
+  it('Strips out Extra Spaces', () => {
+    const results = tagMaker('dog   cat   bird   ');
+    expect(results).toEqual(['dog', 'cat', 'bird']);
+  });
 });
