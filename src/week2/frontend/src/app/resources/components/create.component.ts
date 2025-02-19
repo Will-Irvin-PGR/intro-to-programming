@@ -12,10 +12,9 @@ import { ResourceListItemCreateModel } from '../types';
 @Component({
   selector: 'app-resources-create',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule, JsonPipe], // this is going to be replaced "sometime soon" with a signals based forms module.
+  imports: [ReactiveFormsModule], // this is going to be replaced "sometime soon" with a signals based forms module.
   template: `
     <p>Create a New Resource</p>
-    <pre>{{ form.value | json }}</pre>
     <form [formGroup]="form" class="w-1/3" (ngSubmit)="addItem()">
       <div class="form-control">
         <label for="title" class="label"
@@ -155,6 +154,7 @@ export class CreateComponent {
 
       this.form.reset();
     } else {
+      this.form.markAllAsTouched();
       console.log('Invalid form');
     }
   }
