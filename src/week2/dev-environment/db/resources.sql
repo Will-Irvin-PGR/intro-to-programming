@@ -1,1 +1,1 @@
-create database resources
+create database resources;

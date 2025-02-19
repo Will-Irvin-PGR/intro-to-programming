@@ -1,4 +1,5 @@
 using FluentValidation;
+using Marten;
 using Resources.Api.Resources;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,12 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<IValidator<ResourceListItemCreateModel>, ResourceListItemCreateModelValidations>();
+
+builder.Services.AddMarten(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("resources") ?? throw new Exception("No String Found! Bailing!");
+    options.Connection(connectionString);
+});
 
 var app = builder.Build();
 

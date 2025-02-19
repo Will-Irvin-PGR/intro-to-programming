@@ -1,6 +1,11 @@
 import { JsonPipe } from '@angular/common';
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ResourceStore } from '../services/resource.store';
 import { ResourceListItemCreateModel } from '../types';
 
@@ -57,6 +62,20 @@ import { ResourceListItemCreateModel } from '../types';
             class="input input-bordered"
             formControlName="linkText"
           />
+          @let ltf = form.controls.linkText;
+          @if (ltf.invalid && (ltf.dirty || ltf.touched)) {
+            <div class="alert alert-error">
+              @if (ltf.hasError('required')) {
+                <p>You have to give us text to show</p>
+              }
+              @if (ltf.hasError('minlength')) {
+                <p>Text can be no fewer than 3 characters</p>
+              }
+              @if (ltf.hasError('maxlength')) {
+                <p>Text can be no longer than 20 characters</p>
+              }
+            </div>
+          }
         </label>
       </div>
       <div class="form-control">
@@ -80,20 +99,41 @@ export class CreateComponent {
   store = inject(ResourceStore);
 
   form = new FormGroup({
-    title: new FormControl<string>('', { nonNullable: true }),
+    title: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(100),
+      ],
+    }),
     description: new FormControl<string>('', { nonNullable: true }),
-    link: new FormControl<string>('', { nonNullable: true }),
-    linkText: new FormControl<string>('', { nonNullable: true }),
+    link: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    linkText: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20),
+      ],
+    }),
     tags: new FormControl<string>('', { nonNullable: true }),
   });
 
   addItem() {
     // only do this if it is valid, follows all the rules, etc.
     // send it to our API to add it.
-    const itemToSend = this.form
-      .value as unknown as ResourceListItemCreateModel;
-    this.store.add(itemToSend);
+    if (this.form.valid) {
+      const itemToSend = this.form
+        .value as unknown as ResourceListItemCreateModel;
+      this.store.add(itemToSend);
 
-    this.form.reset();
+      this.form.reset();
+    } else {
+      console.log('Invalid form');
+    }
   }
 }
