@@ -93,5 +93,7 @@ export class CreateComponent {
     const itemToSend = this.form
       .value as unknown as ResourceListItemCreateModel;
     this.store.add(itemToSend);
+
+    this.form.reset();
   }
 }

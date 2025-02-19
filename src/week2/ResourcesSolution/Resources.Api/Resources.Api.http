@@ -4,3 +4,13 @@ GET {{Resources.Api_HostAddress}}/resources
 Accept: application/json
 
 ###
+
+POST {{Resources.Api_HostAddress}}/resources
+Content-Type: application/json
+{
+    "title": "MDN",
+    "description": "Web Stuff",
+    "link": "https://mdn.com",
+    "linkText": "MDN Docs",
+    "tags": ["HTML", "CSS", "JAVASCRIPT"]
+}
