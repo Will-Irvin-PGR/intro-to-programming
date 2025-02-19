@@ -27,6 +27,20 @@ import { ResourceListItemCreateModel } from '../types';
             class="input input-bordered"
             formControlName="title"
           />
+          @let ltfTitle = form.controls.title;
+          @if (ltfTitle.invalid && (ltfTitle.dirty || ltfTitle.touched)) {
+            <div class="alert alert-error">
+              @if (ltfTitle.hasError('required')) {
+                <p>You have to give us text to show</p>
+              }
+              @if (ltfTitle.hasError('minlength')) {
+                <p>Text can be no fewer than 3 characters</p>
+              }
+              @if (ltfTitle.hasError('maxlength')) {
+                <p>Text can be no longer than 100 characters</p>
+              }
+            </div>
+          }
         </label>
       </div>
       <div class="form-control">
@@ -50,6 +64,12 @@ import { ResourceListItemCreateModel } from '../types';
             class="input input-bordered"
             formControlName="link"
           />
+          @let ltfLink = form.controls.link;
+          @if (ltfLink.invalid && (ltfLink.dirty || ltfLink.touched)) {
+            <div class="alert alert-error">
+              <p>Link must be provided</p>
+            </div>
+          }
         </label>
       </div>
       <div class="form-control">
@@ -62,16 +82,18 @@ import { ResourceListItemCreateModel } from '../types';
             class="input input-bordered"
             formControlName="linkText"
           />
-          @let ltf = form.controls.linkText;
-          @if (ltf.invalid && (ltf.dirty || ltf.touched)) {
+          @let ltfLinkText = form.controls.linkText;
+          @if (
+            ltfLinkText.invalid && (ltfLinkText.dirty || ltfLinkText.touched)
+          ) {
             <div class="alert alert-error">
-              @if (ltf.hasError('required')) {
+              @if (ltfLinkText.hasError('required')) {
                 <p>You have to give us text to show</p>
               }
-              @if (ltf.hasError('minlength')) {
+              @if (ltfLinkText.hasError('minlength')) {
                 <p>Text can be no fewer than 3 characters</p>
               }
-              @if (ltf.hasError('maxlength')) {
+              @if (ltfLinkText.hasError('maxlength')) {
                 <p>Text can be no longer than 20 characters</p>
               }
             </div>
