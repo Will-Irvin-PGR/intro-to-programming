@@ -10,15 +10,22 @@ import { ResourceStore } from '../services/resource.store';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FilterComponent } from './filter-component';
 
 @Component({
   selector: 'app-resources-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [LinkDocsDisplayItemComponent, RouterLink],
+  imports: [LinkDocsDisplayItemComponent, RouterLink, FilterComponent],
   template: `
+    <app-resource-filter />
     @if (store.filteredBy() !== null) {
       <p>Filtered by: {{ store.filteredBy() }}</p>
-      <a [routerLink]="['.']" class="btn btn-xs btn-secondary">Clear Filter</a>
+      <a
+        [routerLink]="['.']"
+        [queryParams]="null"
+        class="btn btn-xs btn-secondary"
+        >Clear Filter</a
+      >
     }
     <div
       class="grid grid-cols-3 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4"
