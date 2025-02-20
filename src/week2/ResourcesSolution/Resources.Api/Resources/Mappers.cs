@@ -24,11 +24,15 @@ namespace Resources.Api.Resources;
 [Mapper]
 public static partial class EntityMappers
 {
-    [MapperIgnoreTarget(nameof(ResourceListItemEntity.Id))]
-    [MapperIgnoreTarget(nameof(ResourceListItemEntity.CreatedOn))]
     [MapperIgnoreTarget(nameof(ResourceListItemEntity.CreatedBy))]
+    [MapValue(nameof(ResourceListItemEntity.Id), Use = nameof(EntityMappers.GetUniqueId))]
+    [MapValue(nameof(ResourceListItemEntity.CreatedOn), Use = nameof(EntityMappers.GetCreatedOn))]
     public static partial ResourceListItemEntity MapFromEntity(this ResourceListItemCreateModel entity);
     public static partial ResourceListItemModel MapToResource(this ResourceListItemEntity entity);
 
     public static partial IQueryable<ResourceListItemModel> ProjectToResponse(this IQueryable<ResourceListItemEntity> entity);
+
+    static Guid GetUniqueId() => Guid.NewGuid();
+
+    static DateTimeOffset GetCreatedOn() => DateTimeOffset.Now;
 }

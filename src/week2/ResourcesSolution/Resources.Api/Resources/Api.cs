@@ -44,9 +44,7 @@ public class Api(IValidator<ResourceListItemCreateModel> validator, IDocumentSes
         //    CreatedOn = DateTime.Now,
         //};
         var entityToSave = request.MapFromEntity();
-        entityToSave.Id = Guid.NewGuid();
         entityToSave.CreatedBy = "sue@aol.com";
-        entityToSave.CreatedOn = DateTime.Now;
 
         session.Store(entityToSave);
         await session.SaveChangesAsync();
