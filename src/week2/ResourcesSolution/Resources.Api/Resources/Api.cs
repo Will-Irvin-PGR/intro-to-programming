@@ -43,6 +43,8 @@ public class Api(IValidator<ResourceListItemCreateModel> validator, IDocumentSes
         //    CreatedBy = "sue@aol.com",
         //    CreatedOn = DateTime.Now,
         //};
+
+        // Does the same as above (see mapper class)
         var entityToSave = request.MapFromEntity();
         entityToSave.CreatedBy = "sue@aol.com";
 
