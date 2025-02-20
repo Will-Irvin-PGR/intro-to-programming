@@ -28,7 +28,7 @@ export class FilterComponent {
 
   changeTheFilter(event: any): void {
     // TODO: fix hardcoded link here
-    this.router.navigate(['/resources/list'], {
+    this.router.navigate([], {
       queryParams: { filter: event.target.value },
     });
   }
