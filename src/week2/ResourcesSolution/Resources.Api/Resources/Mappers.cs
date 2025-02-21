@@ -25,9 +25,13 @@ namespace Resources.Api.Resources;
 public static partial class EntityMappers
 {
     [MapperIgnoreTarget(nameof(ResourceListItemEntity.CreatedBy))]
+    [MapperIgnoreTarget(nameof(ResourceListItemEntity.SecurityReviewId))]
     [MapValue(nameof(ResourceListItemEntity.Id), Use = nameof(EntityMappers.GetUniqueId))]
     [MapValue(nameof(ResourceListItemEntity.CreatedOn), Use = nameof(EntityMappers.GetCreatedOn))]
     public static partial ResourceListItemEntity MapFromEntity(this ResourceListItemCreateModel entity);
+
+    [MapperIgnoreTarget(nameof(ResourceListItemEntity.SecurityReviewId))]
+    [MapperIgnoreTarget(nameof(ResourceListItemModel.IsBeingReviewedForSecurity))]
     public static partial ResourceListItemModel MapToResource(this ResourceListItemEntity entity);
 
     public static partial IQueryable<ResourceListItemModel> ProjectToResponse(this IQueryable<ResourceListItemEntity> entity);
