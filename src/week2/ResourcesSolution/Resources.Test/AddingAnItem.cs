@@ -10,15 +10,7 @@ public class AddingAnItem
     [Fact] 
     public async Task AddingAnItemWithASecurityTagNotifiesTheSoftwareApi()
     {
-        var host = await AlbaHost.For<Program>(config =>
-        {
-            config.ConfigureServices(services =>
-            {
-                var fakeSecurityTeam = Substitute.For<INotifytheSecurityReviewTeam>();
-                fakeSecurityTeam.NotifyForSecurityReview(Arg.Any<Guid>()).Returns("");
-                services.AddScoped<INotifytheSecurityReviewTeam>(_ => fakeSecurityTeam);
-            });
-        });
+        var host = await AlbaHost.For<Program>();
         var itemToPost = new ResourceListItemCreateModel
         {
             Description = "Description",
@@ -42,15 +34,7 @@ public class AddingAnItem
     [Fact]
     public async Task AddingAnItemWithoutSecurityTagDoesNotNotifySoftwareApi()
     {
-        var host = await AlbaHost.For<Program>(config =>
-        {
-            config.ConfigureServices(services =>
-            {
-                var fakeSecurityTeam = Substitute.For<INotifytheSecurityReviewTeam>();
-                fakeSecurityTeam.NotifyForSecurityReview(Arg.Any<Guid>()).Returns("");
-                services.AddScoped<INotifytheSecurityReviewTeam>(_ => fakeSecurityTeam);
-            });
-        });
+        var host = await AlbaHost.For<Program>();
         var itemToPost = new ResourceListItemCreateModel
         {
             Description = "Description",
