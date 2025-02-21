@@ -30,6 +30,9 @@ import { RouterLink } from '@angular/router';
               This was created by {{ link().createdBy }} on
               {{ link().createdOn | date }}
             </p>
+            @if (link().isBeingReviewedForSecurity) {
+              <p>Under review by security team</p>
+            }
           </div>
         </div>
       </div>
